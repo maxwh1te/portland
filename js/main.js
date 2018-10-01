@@ -3,7 +3,7 @@ jQuery(document).ready(function($){
     $('.slideshow-top').owlCarousel({
         loop:true,
         nav:true,
-        items: 1,
+        items: 1
     });
 //wraper-best-sellers
     $('.best-seller-slider').owlCarousel({
@@ -49,26 +49,23 @@ jQuery(document).ready(function($){
     var topLinkMenu = $('.link-menu');
 
     topLinkButton.on('click', function () {
-       if($(this).hasClass('active')) {
-           $(this).removeClass('active');
-           $('.menuUpRight').parent().find(topLinkMenu).removeClass('active');
-       } else {
-           $(this).addClass('active');
-           $('.menuUpRight').parent().find(topLinkMenu).addClass('active');
-       }
-    })
+        if($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $('.menuUpRight').parent().find(topLinkMenu).removeClass('active');
+        } else {
+            $(this).addClass('active');
+            $('.menuUpRight').parent().find(topLinkMenu).addClass('active');
+        }
+    });
     //============scroll
     var prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
+    $(window).on('scroll', function() {
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos < currentScrollPos) {
-            navSite.removeClass('active');
-            menuButton.removeClass('active');
-            topLinkButton.removeClass('active');
-            topLinkMenu.removeClass('active');
+            $(navSite, menuButton, topLinkButton, topLinkMenu).removeClass('active');
         }
         prevScrollpos = currentScrollPos;
-    }
+    });
     //=================footer button
     $('.rb-footToggle').on('click', function() {
         if($(this).hasClass('active')) {
@@ -78,41 +75,27 @@ jQuery(document).ready(function($){
             $(this).addClass('active');
             $(this).next().addClass('active');
         }
-    })
+    });
     //====================top scroll button
-    $(function() {
+    $(window).on('scroll', function() {
+        if($(this).scrollTop() !== 0) {
+            $('.toTop').fadeIn();
+        } else {
+            $('.toTop').fadeOut();
+        }
+    });
 
-        $(window).scroll(function() {
-
-            if($(this).scrollTop() !== 0) {
-
-                $('.toTop').fadeIn();
-
-            } else {
-
-                $('.toTop').fadeOut();
-
-            }
-
-        });
-
-        $('.toTop').click(function() {
-
-            $('body,html').animate({scrollTop:0},500);
-
-        });
-
+    $('.toTop').on('click', function() {
+        $('body,html').animate({scrollTop:0},500);
     });
     //=====================button scroll sidebar
     $('.filters-button-open').on('click', function() {
         if($(this).hasClass('active')) {
             $('.filters').first().removeClass('active');
             $(this).removeClass('active');
-            $('.filters').next().removeClass('active');
         } else {
             $('.filters').first().addClass('active');
             $(this).addClass('active');
-            $('.filters').next().addClass('active');
         }
     })
 });
