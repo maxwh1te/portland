@@ -90,12 +90,15 @@ jQuery(document).ready(function($){
     });
     //=====================button scroll sidebar
     $('.filters-button-open').on('click', function() {
+        var filters = $('.filters');
         if($(this).hasClass('active')) {
-            $('.filters').first().removeClass('active');
+            filters.first().removeClass('active');
             $(this).removeClass('active');
+            filters.next().removeClass('active');
         } else {
-            $('.filters').first().addClass('active');
+            filters.first().addClass('active');
             $(this).addClass('active');
+            filters.next().addClass('active');
         }
     })
 });
